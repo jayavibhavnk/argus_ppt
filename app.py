@@ -25,7 +25,7 @@ def display_pdf(pdf_path):
     Display PDF using base64 encoding
     """
     try:
-        with open("31_Adventures_of_Dh2_and_JV.pdf", "rb") as pdf_file:
+        with open(pdf_path, "rb") as pdf_file:
             pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
             st.markdown(
                 f'<iframe src="data:application/pdf;base64,{pdf_base64}" width="100%" height="800" type="application/pdf"></iframe>',
