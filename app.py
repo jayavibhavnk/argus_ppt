@@ -62,17 +62,29 @@ with col2:
     """
 )
 
-# Demo Links
-st.header("Demo")
+# Links
+st.header("Links")
 st.markdown("""
-- [Demo 1: ARGUS Prompt Injection Detection](#)
-- [Demo 2: ARGUS Bias Mitigation](#)
-- [Demo 3: ARGUS RAG Evaluation](#)
+- [BEAD Dataset]()
+- [HaluEval Dataset]()
+- [RagBench Dataset]()
 """)
 
 # Contact Us Section
 st.header("Contact Us")
 st.markdown("""
-- **Jayavibhav Niranjan Kogundi**: [Email](mailto:jniranja@usc.edu), [LinkedIn](#)
+- **Jayavibhav Niranjan Kogundi**: [Email](mailto:jniranja@usc.edu), [Portfolio](https://jayavibhav.netlify.app/), [HuggingFace](https://huggingface.co/jayavibhav)
 - **Dhruv Shetty**: [Email](mailto:ddshetty@usc.edu)
 """)
+
+st.markdown(
+    """
+    ## Other Projects Developed by Us:
+    - [Small LLMs for SQL using COT](https://huggingface.co/jayavibhav/llama3.2_1b_sql)
+    - [Llama 3.2 1B COT](https://huggingface.co/jayavibhav/llama3.2_1b_CoT)
+    - [Llama 3.2 11B Vision - Finetuned for Geometry and Maths](https://huggingface.co/jayavibhav/llama3.2_11B_Vision_Maths_Geometry)
+    - [Llama 3.2 1B Function Calling](https://huggingface.co/jayavibhav/Llama3.2_1B_Cot_LoRa)
+    - [Graph Retrieval for RAG (Python Library)](https://pypi.org/project/MultimodalGraphRetrieval/)
+    """
+)
+
