@@ -65,9 +65,9 @@ with col2:
 # Links
 st.header("Links")
 st.markdown("""
-- [BEAD Dataset]()
-- [HaluEval Dataset]()
-- [RagBench Dataset]()
+- [BEAD Dataset](https://huggingface.co/datasets/shainar/BEAD)
+- [HaluEval Dataset](https://github.com/RUCAIBox/HaluEval)
+- [RagBench Dataset](https://huggingface.co/datasets/rungalileo/ragbench)
 """)
 
 # Contact Us Section
