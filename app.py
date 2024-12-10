@@ -26,7 +26,7 @@ st.markdown(
     - **Feedback Loop**: Iteratively improves prompts and outputs, enhancing adaptability.
 
     **Models used:**
-    - LLM Judge: NomicAI GPT4ALL 70B
+    - LLM Judge: Nemotron 70B
     - Agent Controller: Llama 3.1 8B
     - Prompt Injection: Custom DistilBERT
     - Text Generation: Llama 3.1 8B
