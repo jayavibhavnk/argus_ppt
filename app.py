@@ -1,4 +1,23 @@
 import streamlit as st
+import base64
+
+def get_image_base64(path):
+    """
+    Convert image to base64 for embedding
+    (Note: Replace with actual image path when deploying)
+    """
+    try:
+        with open(path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode()
+    except:
+        return ""
+
+def local_css(file_name):
+    """
+    Load local CSS for custom styling
+    """
+    with open(file_name, "r") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 def argus_landing_page():
     # Page Configuration
@@ -9,39 +28,70 @@ def argus_landing_page():
     )
 
     # Custom CSS
-    local_css("style.css")
+    st.markdown("""
+    <style>
+    .main-title {
+        font-size: 4em;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .subtitle {
+        font-size: 1.5em;
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .contact-section {
+        background-color: #f4f6f7;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+    .contact-title {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     # Main Title
     st.markdown('<div class="main-title">ARGUS</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">AI REGULATORY AND GOVERNANCE FOR UNBIASED AND SAFE LLM SYSTEMS</div>', unsafe_allow_html=True)
 
-    # Introduction
-    st.header("Introduction")
-    st.write("ARGUS is an Agentic Pipeline designed to enhance the safety and reliability of AI-generated content. It integrates advanced models to address critical challenges like prompt safety, bias, and hallucinations.")
+    # Spacer
+    st.markdown("<br>", unsafe_allow_html=True)
 
-    # Methodology
-    st.header("Methodology")
-    st.write("The ARGUS pipeline ensures safe, unbiased, and reliable AI-generated content through key components:")
-    st.markdown("- **Agent Controller**: Dynamically refines pipeline to ensure safe outputs")
-    st.markdown("- **LLM Judge**: Detects and mitigates bias and hallucinations, regenerating outputs when necessary")
-    st.markdown("- **Prompt Injection Detection**: Screens inputs using a DistilBERT classifier to ensure safety")
-    st.markdown("- **Feedback Loop**: Iteratively improves prompts and outputs, enhancing adaptability")
+    # Presentation Section
+    st.header("Our Approach")
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.metric("Bias Detection", "99.5%")
+        st.write("Advanced algorithms to identify and mitigate AI bias")
+    
+    with col2:
+        st.metric("Compliance", "ISO 27001")
+        st.write("Rigorous governance frameworks and standards")
+    
+    with col3:
+        st.metric("Safety Scoring", "Real-time")
+        st.write("Continuous monitoring of LLM ethical performance")
 
-    # Results
-    st.header("Results")
-    st.markdown("**Prompt Injection Detection:**")
-    st.write("Achieved 97% accuracy on the test set.")
-    st.markdown("**Bias Evaluation:**")
-    st.write("Reduced bias by 37% compared to the base model.")
-    st.markdown("**Hallucination Evaluation:**")
-    st.write("52% reduction in hallucinations compared to the base model.")
-    st.markdown("**RAG Evaluation:**")
-    st.write("Showed improvements across different metrics.")
+    # Presentation Details
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Mock Presentation Embedding (you'd replace this with actual presentation link)
+    st.video("https://www.w3schools.com/html/mov_bbb.mp4")
 
     # Contact Section
     st.markdown('<div class="contact-section">', unsafe_allow_html=True)
     st.markdown('<div class="contact-title">Contact Our Team</div>', unsafe_allow_html=True)
 
+    # Contact Details
     contact_info = {
         "Dr. Emily Rodriguez": {
             "LinkedIn": "https://www.linkedin.com/in/example1",
