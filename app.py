@@ -1,15 +1,16 @@
 import streamlit as st
 import base64
+import os
 
 def get_image_base64(path):
     """
     Convert image to base64 for embedding
-    (Note: Replace with actual image path when deploying)
     """
     try:
         with open(path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode()
-    except:
+    except Exception as e:
+        st.error(f"Error loading image: {e}")
         return ""
 
 def local_css(file_name):
@@ -18,6 +19,20 @@ def local_css(file_name):
     """
     with open(file_name, "r") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+def display_pdf(pdf_path):
+    """
+    Display PDF using base64 encoding
+    """
+    try:
+        with open(pdf_path, "rb") as pdf_file:
+            pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
+            st.markdown(
+                f'<iframe src="data:application/pdf;base64,{pdf_base64}" width="100%" height="800" type="application/pdf"></iframe>',
+                unsafe_allow_html=True,
+            )
+    except Exception as e:
+        st.error(f"Error displaying PDF: {e}")
 
 def argus_landing_page():
     # Page Configuration
@@ -28,35 +43,7 @@ def argus_landing_page():
     )
 
     # Custom CSS
-    st.markdown("""
-    <style>
-    .main-title {
-        font-size: 4em;
-        font-weight: bold;
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .subtitle {
-        font-size: 1.5em;
-        color: #34495e;
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    .contact-section {
-        background-color: #f4f6f7;
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 40px;
-    }
-    .contact-title {
-        font-size: 1.8em;
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    local_css("styles.css")
 
     # Main Title
     st.markdown('<div class="main-title">ARGUS</div>', unsafe_allow_html=True)
@@ -65,27 +52,33 @@ def argus_landing_page():
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Presentation Section
-    st.header("Our Approach")
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.metric("Bias Detection", "99.5%")
-        st.write("Advanced algorithms to identify and mitigate AI bias")
-    
-    with col2:
-        st.metric("Compliance", "ISO 27001")
-        st.write("Rigorous governance frameworks and standards")
-    
-    with col3:
-        st.metric("Safety Scoring", "Real-time")
-        st.write("Continuous monitoring of LLM ethical performance")
+    # About ARGUS
+    st.header("About ARGUS")
+    st.write("ARGUS is an Agentix Pipeline designed to enhance safety and reliability of AI generated content. It integrates advanced models to address critical challenges like prompt safety, bias and hallucinations.")
 
-    # Presentation Details
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Mock Presentation Embedding (you'd replace this with actual presentation link)
-    st.video("https://www.w3schools.com/html/mov_bbb.mp4")
+    # Methodology
+    st.header("Methodology")
+    st.write("Our ARGUS pipeline ensures safe, unbiased, and reliable AI-generated content through key components:")
+    st.markdown("""
+    - **Agent Controller**: Dynamically refines pipeline to ensure safe outputs.
+    - **LLM Judge**: Detects and mitigates bias and hallucinations, regenerating outputs when necessary.
+    - **Prompt Injection Detection**: Screens inputs using a DistilBERT classifier to ensure safety.
+    - **Feedback Loop**: Iteratively improves prompts and outputs, enhancing adaptability.
+    - **Models Used**:
+        - LLM Judge: Nanoron 708
+        - Agent Controller: Llama 3.1 BB
+        - Prompt Injection: Custom DistilBERT
+        - Text Generation: Llama 3.1 BB
+        - Vector database: FAISS
+    """, unsafe_allow_html=True)
+
+    # Results
+    st.header("Results")
+    st.image("poster.png", use_column_width=True)
+
+    # PDF Display
+    st.header("Project Overview")
+    display_pdf("31_Adventures_of_Dh2_and_JV.pdf")
 
     # Contact Section
     st.markdown('<div class="contact-section">', unsafe_allow_html=True)
@@ -102,15 +95,12 @@ def argus_landing_page():
             "Twitter": "https://twitter.com/example2"
         }
     }
-
     for name, links in contact_info.items():
         st.markdown(f"**{name}**")
         for platform, link in links.items():
             st.markdown(f"- {platform}: [{link}]({link})")
         st.markdown("---")
-
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Run the landing page
 if __name__ == "__main__":
     argus_landing_page()
