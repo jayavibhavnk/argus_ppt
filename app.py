@@ -18,7 +18,7 @@ def argus_landing_page():
     )
 
     # Custom CSS
-    local_css("styles.css")
+    # local_css("styles.css")
 
     # Main Title
     st.markdown('<div class="main-title">ARGUS</div>', unsafe_allow_html=True)
